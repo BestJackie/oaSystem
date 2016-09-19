@@ -20,7 +20,7 @@
 		</set>
 		<many-to-one name="parent" class="Department" column="parentId"></many-to-one>
 
-		<set name="children">
+		<set name="children" cascade="delete">
 			<key column="parentId"></key>
 			<one-to-many class="Department"></one-to-many>
 		</set>

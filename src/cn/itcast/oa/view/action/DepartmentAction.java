@@ -19,12 +19,23 @@ import java.util.List;
 public class DepartmentAction extends ActionSupport implements ModelDriven<Department> {
 
     @Autowired
-   private DepartmentService departmentService;
+    private DepartmentService departmentService;
+    private Long parentId;
     Department model = new Department();
+
     @Override
     public Department getModel() {
-        return null;
+        return model;
     }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
     /**
      * 列表
      *
@@ -44,7 +55,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
     public String addUI() {
         //准备数据
         List<Department> departmentList = departmentService.findAll();
-        ActionContext.getContext().put("departmentList",departmentList);
+        ActionContext.getContext().put("departmentList", departmentList);
         return "saveUI";
     }
 
@@ -54,6 +65,8 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
      * @return
      */
     public String add() {
+        Department department = departmentService.findOne(parentId);
+        model.setParent(department);
         departmentService.save(model);
         return "toList";
     }
@@ -74,10 +87,16 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
      * @return
      */
     public String editUI() {
+        List<Department> departmentList = departmentService.findAll();
+        ActionContext.getContext().put("departmentList", departmentList);
+
         Department department = departmentService.findOne(model.getId());
         ActionContext.getContext().getValueStack().push(department);
 //        model.setName(role.getName());
 //        model.setDescription(role.getDescription());
+        if (department.getParent() != null) {
+            parentId = department.getParent().getId();
+        }
         return "saveUI";
     }
 
@@ -90,6 +109,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
         Department department = departmentService.findOne(model.getId());
         department.setName(model.getName());
         department.setDescription(model.getDescription());
+        department.setParent(departmentService.findOne(parentId));
         departmentService.update(department);
         return "toList";
     }

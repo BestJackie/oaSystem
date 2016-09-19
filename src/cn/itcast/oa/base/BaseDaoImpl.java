@@ -41,6 +41,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     }
 
     public T getById(Long id) {
+        if (id == null)
+            return null;
         return (T) getSession().get(clazz,id);
     }
 

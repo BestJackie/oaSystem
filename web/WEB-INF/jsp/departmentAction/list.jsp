@@ -34,7 +34,9 @@
         
         <s:iterator value="#departmentList">
 			<tr class="TableDetail1 template">
+
 				<td>${name}&nbsp;</td>
+                <td>${parent.name}&nbsp;</td>
 				<td>${description}&nbsp;</td>
 				<td>
 					<s:a action="department_delete?id=%{id}" onclick="return confirm('您确定要删除吗？')">删除</s:a>
