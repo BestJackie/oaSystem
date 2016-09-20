@@ -42,7 +42,12 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
      * @return
      */
     public String list() {
-        List<Department> departmentList = departmentService.findAll();
+        List<Department> departmentList = null;
+        if (parentId == null) {
+            departmentList = departmentService.findParent();
+        }else {
+            departmentList = departmentService.findChildren(parentId);
+        }
         ActionContext.getContext().put("departmentList", departmentList);
         return "list";
     }

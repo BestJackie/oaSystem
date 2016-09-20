@@ -17,4 +17,12 @@ public interface DepartmentService {
     Department findOne(Long id);
 
     void update(Department department);
+
+    List<Department> findChildren(Long parentId);
+
+    /**
+     * 查询顶级部门
+     * @return
+     */
+    List<Department> findParent();
 }
