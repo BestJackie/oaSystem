@@ -21,6 +21,16 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
     @Autowired
     private DepartmentService departmentService;
     private Long parentId;
+    private Department parent;
+
+    public Department getParent() {
+        return parent;
+    }
+
+    public void setParent(Department parent) {
+        this.parent = parent;
+    }
+
     Department model = new Department();
 
     @Override
@@ -47,6 +57,8 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
             departmentList = departmentService.findParent();
         }else {
             departmentList = departmentService.findChildren(parentId);
+            parent = departmentService.findOne(parentId);
+            ActionContext.getContext().put("parent",parent);
         }
         ActionContext.getContext().put("departmentList", departmentList);
         return "list";
