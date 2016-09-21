@@ -43,7 +43,7 @@ public class UserAction extends BaseAction<User> {
      */
     public String list() {
         List<User> userList = userService.findAll();
-        putIntoMap("userList",userList);
+        putIntoMap("userList", userList);
         return "list";
     }
 
@@ -56,10 +56,10 @@ public class UserAction extends BaseAction<User> {
         //查找部门列表
         List<Department> parentList = departmentService.findParent();
         List<Department> departmentList = DepartmentUtils.getAllDepartments(parentList);
-        putIntoMap("departmentList",departmentList);
+        putIntoMap("departmentList", departmentList);
         //查找role列表
         List<Role> roleList = roleService.findAll();
-        putIntoMap("roleList",roleList);
+        putIntoMap("roleList", roleList);
         return "saveUI";
     }
 
@@ -104,7 +104,26 @@ public class UserAction extends BaseAction<User> {
      * @return
      */
     public String editUI() {
-
+        //显示部门列表
+        List<Department> parentList = departmentService.findParent();
+        List<Department> departmentList = DepartmentUtils.getAllDepartments(parentList);
+        putIntoMap("departmentList", departmentList);
+        //查找role列表
+        List<Role> roleList = roleService.findAll();
+        putIntoMap("roleList", roleList);
+        //回写数据
+        User user = userService.getById(model.getId());
+        pushIntoValueStack(user);
+        //回写部门
+        if (user.getDepartment() != null)
+            departmentId = user.getDepartment().getId();
+        //回写roles
+        if (user.getRoles() != null)
+            roleIds = new Long[user.getRoles().size()];
+        int index = 0;
+        for (Role role : user.getRoles()) {
+            roleIds[index++] = role.getId();
+        }
         return "saveUI";
     }
 
@@ -127,7 +146,6 @@ public class UserAction extends BaseAction<User> {
 
         return "toList";
     }
-
 
 
 }
