@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Administrator on 2016/9/21 0021.
@@ -75,13 +74,16 @@ public class UserAction extends BaseAction<User> {
         Department department = departmentService.getById(departmentId);
         model.setDepartment(department);
         //设置关联岗位
-        Set<Role> roles = new HashSet<Role>();
-        for (int i = 0; i < roleIds.length; i++) {
-            Long roleId = roleIds[i];
-            Role role = roleService.getById(roleId);
-            roles.add(role);
-        }
-        model.setRoles(roles);
+//        Set<Role> roles = new HashSet<Role>();
+//        for (int i = 0; i < roleIds.length; i++) {
+//            Long roleId = roleIds[i];
+//            Role role = roleService.getById(roleId);
+//            roles.add(role);
+//        }
+        List<Role> roles = roleService.getByIds(roleIds);
+        model.setRoles(new HashSet<Role>(roles));
+        //reset password;
+        model.setPassWord("1234");
         userService.save(model);
         return "toList";
     }
