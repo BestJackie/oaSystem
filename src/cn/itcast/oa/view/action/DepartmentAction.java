@@ -1,12 +1,8 @@
 package cn.itcast.oa.view.action;
 
+import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Department;
-import cn.itcast.oa.service.DepartmentService;
 import cn.itcast.oa.util.DepartmentUtils;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -17,10 +13,10 @@ import java.util.List;
  */
 @Controller
 @Scope("prototype")
-public class DepartmentAction extends ActionSupport implements ModelDriven<Department> {
+public class DepartmentAction extends BaseAction<Department> {
 
-    @Autowired
-    private DepartmentService departmentService;
+//    @Autowired
+//    private DepartmentService departmentService;
     private Long parentId;
     private Department parent;
 
@@ -32,12 +28,12 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
         this.parent = parent;
     }
 
-    Department model = new Department();
-
-    @Override
-    public Department getModel() {
-        return model;
-    }
+//    Department model = new Department();
+//
+//    @Override
+//    public Department getModel() {
+//        return model;
+//    }
 
     public Long getParentId() {
         return parentId;
@@ -58,10 +54,10 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
             departmentList = departmentService.findParent();
         }else {
             departmentList = departmentService.findChildren(parentId);
-            parent = departmentService.findOne(parentId);
-            ActionContext.getContext().put("parent",parent);
+            parent = departmentService.getById(parentId);
+            putIntoMap("parent",parent);
         }
-        ActionContext.getContext().put("departmentList", departmentList);
+        putIntoMap("departmentList", departmentList);
         return "list";
     }
 
@@ -74,7 +70,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
         //准备数据
         List<Department> departmentTopList = departmentService.findParent();
         List<Department> departmentList = DepartmentUtils.getAllDepartments(departmentTopList);
-        ActionContext.getContext().put("departmentList", departmentList);
+        putIntoMap("departmentList", departmentList);
         return "saveUI";
     }
 
@@ -84,7 +80,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
      * @return
      */
     public String add() {
-        Department department = departmentService.findOne(parentId);
+        Department department = departmentService.getById(parentId);
         model.setParent(department);
         departmentService.save(model);
         return "toList";
@@ -108,9 +104,9 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
     public String editUI() {
         List<Department> departmentTopList = departmentService.findParent();
         List<Department> departmentList = DepartmentUtils.getAllDepartments(departmentTopList);
-        ActionContext.getContext().put("departmentList", departmentList);
-        Department department = departmentService.findOne(model.getId());
-        ActionContext.getContext().getValueStack().push(department);
+        putIntoMap("departmentList", departmentList);
+        Department department = departmentService.getById(model.getId());
+        pushIntoValueStack(department);
 //        model.setName(role.getName());
 //        model.setDescription(role.getDescription());
         if (department.getParent() != null) {
@@ -125,10 +121,10 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
      * @return
      */
     public String edit() {
-        Department department = departmentService.findOne(model.getId());
+        Department department = departmentService.getById(model.getId());
         department.setName(model.getName());
         department.setDescription(model.getDescription());
-        department.setParent(departmentService.findOne(parentId));
+        department.setParent(departmentService.getById(parentId));
         departmentService.update(department);
         return "toList";
     }

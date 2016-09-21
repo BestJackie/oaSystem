@@ -2,21 +2,22 @@ package cn.itcast.oa.base;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/13 0013.
  */
-public class BaseDaoImpl<T> implements BaseDao<T> {
 
-    @Resource
-    private SessionFactory sessionFactory;
-    private Class<T> clazz;
+public class DaoSupportImpl<T> implements DaoSupport<T> {
 
-    public BaseDaoImpl() {
+    @Autowired
+    protected SessionFactory sessionFactory;
+    protected Class<T> clazz;
+
+    public DaoSupportImpl() {
         //使用反射技术得到T的真实类型
         ParameterizedType type = (ParameterizedType)this.getClass().getGenericSuperclass();//获取当前new的对象泛型的父类
         this.clazz = (Class<T>) type.getActualTypeArguments()[0];

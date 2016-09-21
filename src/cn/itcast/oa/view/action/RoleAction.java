@@ -1,11 +1,7 @@
 package cn.itcast.oa.view.action;
 
+import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Role;
-import cn.itcast.oa.service.RoleService;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -16,11 +12,7 @@ import java.util.List;
  */
 @Controller
 @Scope("prototype")
-public class RoleAction extends ActionSupport implements ModelDriven<Role> {
-    @Autowired
-    private RoleService roleService;
-
-
+public class RoleAction extends BaseAction<Role> {
 //    private Long id;
 //
 //    private String name;
@@ -58,7 +50,7 @@ public class RoleAction extends ActionSupport implements ModelDriven<Role> {
      */
     public String list() {
         List<Role> roleList = roleService.findAll();
-        ActionContext.getContext().put("roleList", roleList);
+        putIntoMap("roleList", roleList);
         return "list";
     }
 
@@ -98,8 +90,8 @@ public class RoleAction extends ActionSupport implements ModelDriven<Role> {
      * @return
      */
     public String editUI() {
-        Role role = roleService.findOne(model.getId());
-        ActionContext.getContext().getValueStack().push(role);
+        Role role = roleService.getById(model.getId());
+        pushIntoValueStack(role);
 //        model.setName(role.getName());
 //        model.setDescription(role.getDescription());
         return "saveUI";
@@ -111,17 +103,17 @@ public class RoleAction extends ActionSupport implements ModelDriven<Role> {
      * @return
      */
     public String edit() {
-        Role role = roleService.findOne(model.getId());
+        Role role = roleService.getById(model.getId());
         role.setName(model.getName());
         role.setDescription(model.getDescription());
         roleService.update(role);
         return "toList";
     }
 
-    Role model = new Role();
-
-    @Override
-    public Role getModel() {
-        return model;
-    }
+//    Role model = new Role();
+//
+//    @Override
+//    public Role getModel() {
+//        return model;
+//    }
 }
