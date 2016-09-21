@@ -133,7 +133,21 @@ public class UserAction extends BaseAction<User> {
      * @return
      */
     public String edit() {
-
+        //1、找到修改数据User对象
+        User user = userService.getById(model.getId());
+        //2、设置修改数据
+        user.setLoginName(model.getLoginName());
+        user.setName(model.getName());
+        user.setDescription(model.getDescription());
+        user.setEmail(model.getEmail());
+        user.setGender(model.getGender());
+        user.setPhoneNumber(model.getPhoneNumber());
+        Department department = departmentService.getById(departmentId);
+        user.setDepartment(department);
+        List<Role> roles = roleService.getByIds(roleIds);
+        user.setRoles(new HashSet<Role>(roles));
+        //3、保存修改后的user
+        userService.update(user);
         return "toList";
     }
 
@@ -142,8 +156,10 @@ public class UserAction extends BaseAction<User> {
      *
      * @return
      */
-    public String resetPassWord() {
-
+    public String initPassword() {
+        User user = userService.getById(model.getId());
+        user.setPassWord("1234");
+        userService.update(user);
         return "toList";
     }
 
