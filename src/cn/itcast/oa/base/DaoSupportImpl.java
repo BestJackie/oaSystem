@@ -20,7 +20,7 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
 
     public DaoSupportImpl() {
         //使用反射技术得到T的真实类型
-        ParameterizedType type = (ParameterizedType)this.getClass().getGenericSuperclass();//获取当前new的对象泛型的父类
+        ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();//获取当前new的对象泛型的父类
         this.clazz = (Class<T>) type.getActualTypeArguments()[0];
 //        System.out.println("clazz------>"+clazz);
     }
@@ -45,17 +45,18 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
     public T getById(Long id) {
         if (id == null)
             return null;
-        return (T) getSession().get(clazz,id);
+        return (T) getSession().get(clazz, id);
     }
 
     public List<T> getByIds(Long[] ids) {
         return getSession().createQuery(
-                "FROM User WHERE id in (:ids)").setParameter("ids",ids).list();
+                "FROM" + clazz.getSimpleName() + "WHERE id in (:ids)")
+                .setParameter("ids", ids).list();
     }
 
     public List<T> findAll() {
         return getSession().createQuery(//
-                    "FROM " + clazz.getSimpleName())//
-                        .list();
+                "FROM " + clazz.getSimpleName())//
+                .list();
     }
 }
