@@ -2,6 +2,7 @@ package cn.itcast.oa.view.action;
 
 import cn.itcast.oa.domain.Department;
 import cn.itcast.oa.service.DepartmentService;
+import cn.itcast.oa.util.DepartmentUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -71,7 +72,8 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
      */
     public String addUI() {
         //准备数据
-        List<Department> departmentList = departmentService.findAll();
+        List<Department> departmentTopList = departmentService.findParent();
+        List<Department> departmentList = DepartmentUtils.getAllDepartments(departmentTopList);
         ActionContext.getContext().put("departmentList", departmentList);
         return "saveUI";
     }
@@ -104,9 +106,9 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
      * @return
      */
     public String editUI() {
-        List<Department> departmentList = departmentService.findAll();
+        List<Department> departmentTopList = departmentService.findParent();
+        List<Department> departmentList = DepartmentUtils.getAllDepartments(departmentTopList);
         ActionContext.getContext().put("departmentList", departmentList);
-
         Department department = departmentService.findOne(model.getId());
         ActionContext.getContext().getValueStack().push(department);
 //        model.setName(role.getName());
