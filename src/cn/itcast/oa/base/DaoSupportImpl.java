@@ -3,6 +3,7 @@ package cn.itcast.oa.base;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/9/13 0013.
  */
-
+@Transactional
 public class DaoSupportImpl<T> implements DaoSupport<T> {
 
     @Autowired

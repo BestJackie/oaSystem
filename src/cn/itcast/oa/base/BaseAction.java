@@ -2,6 +2,7 @@ package cn.itcast.oa.base;
 
 import cn.itcast.oa.service.DepartmentService;
 import cn.itcast.oa.service.RoleService;
+import cn.itcast.oa.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -31,7 +32,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
         }
     }
 
-    @Override
+
     public T getModel() {
         return model;
     }
@@ -39,6 +40,8 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
     protected RoleService roleService;
     @Autowired
     protected DepartmentService departmentService;
+    @Autowired
+    protected UserService userService;
 
 
     protected void putIntoMap(String key,Object value){

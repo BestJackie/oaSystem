@@ -1,9 +1,13 @@
 package cn.itcast.oa.test;
 
+import cn.itcast.oa.domain.Role;
+import cn.itcast.oa.service.RoleService;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/8 0008.
@@ -24,7 +28,15 @@ public class SpringTest {
     public void testTranctionManager(){
         TestService testService = (TestService)applicationContext.getBean("testService");
         testService.saveTwoUser();
-
     }
+    @Test
+    public void serviceTest(){
+        RoleService roleService =(RoleService)applicationContext.getBean("roleServiceImpl");
+        List<Role> list= roleService.findAll();
+        for(Role role:list){
+            System.out.println(role.getName());
+        }
+    }
+
 
 }

@@ -43,14 +43,14 @@ public class DepartmentServiceImpl extends DaoSupportImpl<Department> implements
 //        departmentDao.update(department);
 //    }
 
-    @Override
+
     public List<Department> findChildren(Long parentId) {
         return getSession()
                 .createQuery("FROM Department d where d.parent.id = ?")
                 .setParameter(0,parentId).list();
     }
 
-    @Override
+
     public List<Department> findParent() {
         return getSession()
                 .createQuery("from Department d where d.parent is null ")
