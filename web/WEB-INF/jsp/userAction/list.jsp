@@ -64,9 +64,6 @@
     </div>
 </div>
 
-<!-- 分页信息 -->
-<%@ include  file="/WEB-INF/jsp/public/pageView.jspf"%>
-<s:form action="user_list"></s:form>
 
 
 </body>
