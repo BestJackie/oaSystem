@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,11 +50,15 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
     }
 
     public List<T> getByIds(Long[] ids) {
-        return getSession().createQuery(
-                "FROM" + clazz.getSimpleName() + "WHERE id in (:ids)")
-                .setParameter("ids", ids).list();
+        if (ids == null || ids.length == 0) {
+            return Collections.EMPTY_LIST;
+        } else {
+            return getSession().createQuery(//
+                    "FROM " + clazz.getSimpleName() + " WHERE id IN (:ids)")//
+                    .setParameterList("ids", ids)//
+                    .list();
+        }
     }
-
     public List<T> findAll() {
         return getSession().createQuery(//
                 "FROM " + clazz.getSimpleName())//
