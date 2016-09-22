@@ -14,6 +14,16 @@ public class Role {
 
     private Set<User> users;
 
+    private Set<Privilege> privileges;
+
+    public Set<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(Set<Privilege> privileges) {
+        this.privileges = privileges;
+    }
+
     public Set<User> getUsers() {
         return users;
     }

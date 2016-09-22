@@ -19,10 +19,17 @@
 		-->
 		
 		<!-- roles属性，本类与Role的多对多-->
-		<set name="users" table="itcast_user_role" lazy="false">
+		<set name="users" table="itcast_user_role">
 			<key column="roleId"></key>
 			<many-to-many class="User" column="userId"></many-to-many>
 		</set>
+
+		<set name="privileges" table="itcast_privilege_role">
+			<key column="roleId"></key>
+			<many-to-many class="Privilege" column="privilegeId"/>
+		</set>
+
+
 		
 		
 	</class>

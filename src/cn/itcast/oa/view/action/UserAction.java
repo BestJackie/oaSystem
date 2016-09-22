@@ -19,6 +19,7 @@ import java.util.List;
 @Scope("prototype")
 public class UserAction extends BaseAction<User> {
     private Long departmentId;
+
     private Long[] roleIds;
 
     public Long[] getRoleIds() {
