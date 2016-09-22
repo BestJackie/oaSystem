@@ -1,7 +1,9 @@
 package cn.itcast.oa.test;
 
 import cn.itcast.oa.domain.Role;
+import cn.itcast.oa.domain.User;
 import cn.itcast.oa.service.RoleService;
+import cn.itcast.oa.service.UserService;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -36,6 +38,12 @@ public class SpringTest {
         for(Role role:list){
             System.out.println(role.getName());
         }
+    }
+    @Test
+    public void testLogin(){
+        UserService userService = (UserService)applicationContext.getBean("userServiceImpl");
+        User user =  userService.findByLoginNameAndPassword("qwqwqw","1234");
+        System.out.println(user.getName());
     }
 
 

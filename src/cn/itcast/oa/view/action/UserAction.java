@@ -5,6 +5,7 @@ import cn.itcast.oa.domain.Department;
 import cn.itcast.oa.domain.Role;
 import cn.itcast.oa.domain.User;
 import cn.itcast.oa.util.DepartmentUtils;
+import com.opensymphony.xwork2.ActionContext;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -167,5 +168,46 @@ public class UserAction extends BaseAction<User> {
         return "toList";
     }
 
+    /**
+     * 登录界面
+     *
+     * @return
+     */
+    public String loginUI() {
+        return "loginUI";
+    }
+
+    /**
+     * 登录
+     *
+     * @return
+     */
+    public String login() {
+        if (model.getLoginName() == null) {
+            addFieldError("login", "登陆名不能为空");
+            return "loginUI";
+        }
+        if (model.getPassWord() == null) {
+            addFieldError("password", "密码不能为空");
+            return "loginUI";
+        }
+        User user = userService.findByLoginNameAndPassword(model.getLoginName(), model.getPassWord());
+        if (user == null) {
+            addFieldError("login", "登陆名或密码错误");
+            return "loginUI";
+        }
+        ActionContext.getContext().getSession().put("user", user);
+        return "toIndex";
+    }
+
+    /**
+     * 注销
+     *
+     * @return
+     */
+    public String logout() {
+        ActionContext.getContext().getSession().remove("user");
+        return "logout";
+    }
 
 }

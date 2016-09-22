@@ -7,4 +7,5 @@ import cn.itcast.oa.domain.User;
  * Created by Administrator on 2016/9/21 0021.
  */
 public interface UserService extends DaoSupport<User> {
+    User findByLoginNameAndPassword(String loginName, String passWord);
 }

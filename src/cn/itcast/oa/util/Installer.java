@@ -26,7 +26,6 @@ public class Installer {
         user.setLoginName("admin");
         user.setName("超级管理员");
         user.setPassWord(DigestUtils.md5Hex("admin"));
-
         // ==============================================================
         // 保存权限数据
         Privilege menu, menu1, menu2, menu3, menu4, menu5;
@@ -57,31 +56,31 @@ public class Installer {
         session.save(new Privilege("用户修改", "/user_edit", menu3));
         session.save(new Privilege("初始化密码", "/user_initPassword", menu3));
 
-//        // --------------------
-//        menu = new Privilege("网上交流", null, null);
-//        menu1 = new Privilege("论坛管理", "/forumManage_list", menu);
-//        menu2 = new Privilege("论坛", "/forum_list", menu);
-//        session.save(menu);
-//        session.save(menu1);
-//        session.save(menu2);
-//
-//        // --------------------
-//        menu = new Privilege("审批流转", null, null);
-//        menu1 = new Privilege("审批流程管理", "/processDefinition_list", menu);
-//        menu2 = new Privilege("申请模板管理", "/template_list", menu);
-//        menu3 = new Privilege("起草申请", "/flow_templateList", menu);
-//        menu4 = new Privilege("待我审批", "/flow_myTaskList", menu);
-//        menu5 = new Privilege("我的申请查询", "/flow_myApplicationList", menu);
-//        session.save(menu);
-//        session.save(menu1);
-//        session.save(menu2);
-//        session.save(menu3);
-//        session.save(menu4);
-//        session.save(menu5);
+        // --------------------
+        menu = new Privilege("网上交流", null, null);
+        menu1 = new Privilege("论坛管理", "/forumManage_list", menu);
+        menu2 = new Privilege("论坛", "/forum_list", menu);
+        session.save(menu);
+        session.save(menu1);
+        session.save(menu2);
+
+        // --------------------
+        menu = new Privilege("审批流转", null, null);
+        menu1 = new Privilege("审批流程管理", "/processDefinition_list", menu);
+        menu2 = new Privilege("申请模板管理", "/template_list", menu);
+        menu3 = new Privilege("起草申请", "/flow_templateList", menu);
+        menu4 = new Privilege("待我审批", "/flow_myTaskList", menu);
+        menu5 = new Privilege("我的申请查询", "/flow_myApplicationList", menu);
+        session.save(menu);
+        session.save(menu1);
+        session.save(menu2);
+        session.save(menu3);
+        session.save(menu4);
+        session.save(menu5);
     }
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("config/applicationContext");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         Installer installer = (Installer) applicationContext.getBean("installer");
         installer.install();
     }
