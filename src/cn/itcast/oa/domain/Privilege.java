@@ -19,6 +19,15 @@ public class Privilege {
 
     private Set<Role> roles;
 
+    public Privilege() {
+    }
+
+    public Privilege(String name, String url, Privilege parent) {
+        this.name = name;
+        this.url = url;
+        this.parent = parent;
+    }
+
     public Long getId() {
         return id;
     }
