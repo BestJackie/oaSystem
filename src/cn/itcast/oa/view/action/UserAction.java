@@ -5,6 +5,7 @@ import cn.itcast.oa.domain.Department;
 import cn.itcast.oa.domain.Role;
 import cn.itcast.oa.domain.User;
 import cn.itcast.oa.util.DepartmentUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -82,8 +83,9 @@ public class UserAction extends BaseAction<User> {
 //        }
         List<Role> roles = roleService.getByIds(roleIds);
         model.setRoles(new HashSet<Role>(roles));
-        //reset password;
-        model.setPassWord("1234");
+        //reset password(使用MD5摘要);
+        String password = DigestUtils.md5Hex("1234");
+        model.setPassWord(password);
         userService.save(model);
         return "toList";
     }
@@ -158,7 +160,8 @@ public class UserAction extends BaseAction<User> {
      */
     public String initPassword() {
         User user = userService.getById(model.getId());
-        user.setPassWord("1234");
+        String password = DigestUtils.md5Hex("1234");
+        user.setPassWord(password);
         userService.update(user);
         return "toList";
     }
