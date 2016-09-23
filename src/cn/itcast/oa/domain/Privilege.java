@@ -1,12 +1,13 @@
 package cn.itcast.oa.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * 权限实体
  * Created by Administrator on 2016/9/22 0022.
  */
-public class Privilege {
+public class Privilege implements Serializable {
     private Long id;
 
     private String name;

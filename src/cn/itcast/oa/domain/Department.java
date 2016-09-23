@@ -1,11 +1,12 @@
 package cn.itcast.oa.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by Administrator on 2016/9/14 0014.
  */
-public class Department {
+public class Department implements Serializable{
     private Long id;
     private String name;
     private String description;

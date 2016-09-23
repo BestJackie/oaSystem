@@ -1,11 +1,15 @@
 package cn.itcast.oa.domain;
 
+import com.opensymphony.xwork2.ActionContext;
+
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 
 /**
  * Created by Administrator on 2016/9/13 0013.
  */
-public class User {
+public class User implements Serializable {
     private Long id;
     private String name;
     private String description;
@@ -30,15 +34,19 @@ public class User {
     }
 
     public boolean hasPrivilegeByUrl(String url) {
+
+        if(isAdmin())
+            return true;
         //去掉后面的参数
         int index = url.indexOf("?");
         if (index > -1)
             url = url.substring(0, index);
-        //去掉UI
+        //去掉"UI"
         if (url.endsWith("UI"))
             url = url.substring(0, url.length() - 2);
 
-        if(isAdmin())
+        Collection<String> allPrivilegeUrls = (Collection<String>) ActionContext.getContext().getApplication().get("allPrivilegeUrls");
+        if(!allPrivilegeUrls.contains(url))
             return true;
         for (Role role : roles) {
             for (Privilege privilege : role.getPrivileges())

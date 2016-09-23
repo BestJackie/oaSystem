@@ -6,6 +6,7 @@ import cn.itcast.oa.service.PrivilegeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -15,8 +16,14 @@ import java.util.List;
 @Transactional
 public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements PrivilegeService {
     public List<Privilege> getTopPrivilegeList() {
-        return getSession().createQuery("" +
+        return getSession().createQuery(
                 "from Privilege p where p.parent is null ")
                 .list();
+    }
+
+    public Collection<String> getAllPrivilegeUrl() {
+        return getSession().createQuery(
+                "select distinct p.url from Privilege p where p.url is not null "
+        ).list();
     }
 }
