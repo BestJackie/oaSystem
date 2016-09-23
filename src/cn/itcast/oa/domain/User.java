@@ -22,7 +22,27 @@ public class User {
             return true;
         for (Role role : roles) {
             for (Privilege privilege : role.getPrivileges())
-                if (name.equals(privilege.getName())) {
+                if (privilege.getName().equals(name)) {
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    public boolean hasPrivilegeByUrl(String url) {
+        //去掉后面的参数
+        int index = url.indexOf("?");
+        if (index > -1)
+            url = url.substring(0, index);
+        //去掉UI
+        if (url.endsWith("UI"))
+            url = url.substring(0, url.length() - 2);
+
+        if(isAdmin())
+            return true;
+        for (Role role : roles) {
+            for (Privilege privilege : role.getPrivileges())
+                if (url.equals(privilege.getUrl())) {
                     return true;
                 }
         }
