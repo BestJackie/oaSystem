@@ -17,6 +17,25 @@ public class User {
     private String email;
     private String passWord;
 
+    public boolean hasPrivilegeByName(String name) {
+        if(isAdmin())
+            return true;
+        for (Role role : roles) {
+            for (Privilege privilege : role.getPrivileges())
+                if (name.equals(privilege.getName())) {
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isAdmin(){
+        return "admin".equals(loginName);
+    }
+
     public String getDescription() {
         return description;
     }
@@ -81,9 +100,10 @@ public class User {
         this.passWord = passWord;
     }
 
-    public User(){
+    public User() {
         super();
     }
+
     public Long getId() {
         return id;
     }
