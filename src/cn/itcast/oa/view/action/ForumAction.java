@@ -69,7 +69,7 @@ public class ForumAction extends BaseAction<Forum> {
      * @return
      */
     public String moveUp() {
-
+        forumService.moveUp(model.getId());
 
         return COMMON_TOLIST;
     }
@@ -79,7 +79,7 @@ public class ForumAction extends BaseAction<Forum> {
      * @return
      */
     public String moveDown() {
-
+        forumService.moveDown(model.getId());
 
         return COMMON_TOLIST;
     }
