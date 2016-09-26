@@ -47,7 +47,7 @@ public class UserAction extends BaseAction<User> {
     public String list() {
         List<User> userList = userService.findAll();
         putIntoMap("userList", userList);
-        return "list";
+        return COMMON_LIST;
     }
 
     /**
@@ -63,7 +63,7 @@ public class UserAction extends BaseAction<User> {
         //查找role列表
         List<Role> roleList = roleService.findAll();
         putIntoMap("roleList", roleList);
-        return "saveUI";
+        return COMMON_SAVEUI;
     }
 
     /**
@@ -89,7 +89,7 @@ public class UserAction extends BaseAction<User> {
         String password = DigestUtils.md5Hex("1234");
         model.setPassWord(password);
         userService.save(model);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -99,7 +99,7 @@ public class UserAction extends BaseAction<User> {
      */
     public String delete() {
         userService.delete(model.getId());
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -128,7 +128,7 @@ public class UserAction extends BaseAction<User> {
         for (Role role : user.getRoles()) {
             roleIds[index++] = role.getId();
         }
-        return "saveUI";
+        return COMMON_SAVEUI;
     }
 
     /**
@@ -152,7 +152,7 @@ public class UserAction extends BaseAction<User> {
         user.setRoles(new HashSet<Role>(roles));
         //3、保存修改后的user
         userService.update(user);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -165,7 +165,7 @@ public class UserAction extends BaseAction<User> {
         String password = DigestUtils.md5Hex("1234");
         user.setPassWord(password);
         userService.update(user);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -174,7 +174,7 @@ public class UserAction extends BaseAction<User> {
      * @return
      */
     public String loginUI() {
-        return "loginUI";
+        return LOGINUI;
     }
 
     /**
@@ -185,19 +185,19 @@ public class UserAction extends BaseAction<User> {
     public String login() {
         if (model.getLoginName() == null) {
             addFieldError("login", "登陆名不能为空");
-            return "loginUI";
+            return LOGINUI;
         }
         if (model.getPassWord() == null) {
             addFieldError("password", "密码不能为空");
-            return "loginUI";
+            return LOGINUI;
         }
         User user = userService.findByLoginNameAndPassword(model.getLoginName(), model.getPassWord());
         if (user == null) {
             addFieldError("login", "登陆名或密码错误");
-            return "loginUI";
+            return LOGINUI;
         }
         ActionContext.getContext().getSession().put("user", user);
-        return "toIndex";
+        return TO_INDEX;
     }
 
     /**
@@ -207,7 +207,7 @@ public class UserAction extends BaseAction<User> {
      */
     public String logout() {
         ActionContext.getContext().getSession().remove("user");
-        return "logout";
+        return LOGOUT;
     }
 
 }

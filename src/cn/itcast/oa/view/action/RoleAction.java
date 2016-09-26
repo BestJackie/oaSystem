@@ -71,7 +71,7 @@ public class RoleAction extends BaseAction<Role> {
     public String list() {
         List<Role> roleList = roleService.findAll();
         putIntoMap("roleList", roleList);
-        return "list";
+        return COMMON_LIST;
     }
 
     /**
@@ -80,7 +80,7 @@ public class RoleAction extends BaseAction<Role> {
      * @return
      */
     public String addUI() {
-        return "saveUI";
+        return COMMON_SAVEUI;
     }
 
     /**
@@ -91,7 +91,7 @@ public class RoleAction extends BaseAction<Role> {
     public String add() {
 
         roleService.save(model);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -101,7 +101,7 @@ public class RoleAction extends BaseAction<Role> {
      */
     public String delete() {
         roleService.delete(model.getId());
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -114,7 +114,7 @@ public class RoleAction extends BaseAction<Role> {
         pushIntoValueStack(role);
 //        model.setName(role.getName());
 //        model.setDescription(role.getDescription());
-        return "saveUI";
+        return COMMON_SAVEUI;
     }
 
     /**
@@ -127,7 +127,7 @@ public class RoleAction extends BaseAction<Role> {
         role.setName(model.getName());
         role.setDescription(model.getDescription());
         roleService.update(role);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
 //    Role model = new Role();
@@ -156,7 +156,7 @@ public class RoleAction extends BaseAction<Role> {
         }
         List<Privilege> privilegeList = privilegeService.findAll();
         putIntoMap("privilegeList",privilegeList);
-        return "setPrivilegeUI";
+        return SET_PRIVILEGEUI;
     }
 
     /**
@@ -172,7 +172,7 @@ public class RoleAction extends BaseAction<Role> {
         role.setPrivileges(new HashSet<Privilege>(privileges));
         //3、保存修改后的role
         roleService.update(role);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
 

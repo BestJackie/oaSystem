@@ -1,6 +1,6 @@
 package cn.itcast.oa.view.action;
 
-import com.opensymphony.xwork2.ActionSupport;
+import cn.itcast.oa.base.BaseAction;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -9,22 +9,22 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 @Scope("prototype")
-public class HomeAction extends ActionSupport {
+public class HomeAction extends BaseAction{
 
     public String index(){
-        return "index";
+        return HOME_INDEX;
     }
     public String top(){
-        return "top";
+        return HOME_TOP;
     }
     public String bottom(){
-        return "bottom";
+        return HOME_BOTTOM;
     }
     public String left(){
-        return "left";
+        return HOME_LEFT;
     }
     public String right(){
-        return "right";
+        return HOME_RIGHT;
     }
 
 }

@@ -58,7 +58,7 @@ public class DepartmentAction extends BaseAction<Department> {
             putIntoMap("parent",parent);
         }
         putIntoMap("departmentList", departmentList);
-        return "list";
+        return COMMON_LIST;
     }
 
     /**
@@ -71,7 +71,7 @@ public class DepartmentAction extends BaseAction<Department> {
         List<Department> departmentTopList = departmentService.findParent();
         List<Department> departmentList = DepartmentUtils.getAllDepartments(departmentTopList);
         putIntoMap("departmentList", departmentList);
-        return "saveUI";
+        return COMMON_SAVEUI;
     }
 
     /**
@@ -83,7 +83,7 @@ public class DepartmentAction extends BaseAction<Department> {
         Department department = departmentService.getById(parentId);
         model.setParent(department);
         departmentService.save(model);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -93,7 +93,7 @@ public class DepartmentAction extends BaseAction<Department> {
      */
     public String delete() {
         departmentService.delete(model.getId());
-        return "toList";
+        return COMMON_TOLIST;
     }
 
     /**
@@ -112,7 +112,7 @@ public class DepartmentAction extends BaseAction<Department> {
         if (department.getParent() != null) {
             parentId = department.getParent().getId();
         }
-        return "saveUI";
+        return COMMON_SAVEUI;
     }
 
     /**
@@ -126,7 +126,7 @@ public class DepartmentAction extends BaseAction<Department> {
         department.setDescription(model.getDescription());
         department.setParent(departmentService.getById(parentId));
         departmentService.update(department);
-        return "toList";
+        return COMMON_TOLIST;
     }
 
 }
