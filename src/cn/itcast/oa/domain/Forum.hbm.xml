@@ -12,6 +12,17 @@
 		<property name="name"/>
 		<property name="description" />
 		<property name="position"/>
+		<property name="topicCount"/>
+		<property name="articleCount"/>
+		<!-- topics属性，本类与topic的一对多关系 -->
+		<set name="topics">
+			<key column="forumId"></key>
+			<one-to-many class="Topic"/>
+		</set>
+		<!-- lastTopic 属性，本类与topic的一对一关系，才用
+		 基于外键的一对一映射方式，本方有外键-->
+		<many-to-one name="lastTopic" class="Topic" column="lastTopicId" unique="true"/>
+
 		
 
 		

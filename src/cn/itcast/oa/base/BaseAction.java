@@ -56,11 +56,6 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
     public static final String COMMON_LIST = "list";
     public static final String COMMON_TOLIST = "toList";
     public static final String COMMON_SAVEUI = "saveUI";
-    public static final String HOME_INDEX = "index";
-    public static final String HOME_RIGHT = "right";
-    public static final String HOME_TOP = "top";
-    public static final String HOME_BOTTOM = "bottom";
-    public static final String HOME_LEFT = "left";
     public static final String SET_PRIVILEGEUI = "setPrivilegeUI";
     public static final String LOGINUI = "loginUI";
     public static final String LOGOUT = "logout";
