@@ -32,7 +32,7 @@ public class Topic extends Article{
     }
 
     public void setForum(Forum forum) {
-        this.forum = forum;
+        this.forum = this.forum;
     }
 
     public Set<Reply> getReplies() {

@@ -45,6 +45,10 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
     protected PrivilegeService privilegeService;
     @Autowired
     protected ForumService forumService;
+    @Autowired
+    protected ReplyService replyService;
+    @Autowired
+    protected TopicService topicService;
 
 
     protected void putIntoMap(String key, Object value) {
