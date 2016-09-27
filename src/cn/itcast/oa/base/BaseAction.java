@@ -1,5 +1,6 @@
 package cn.itcast.oa.base;
 
+import cn.itcast.oa.domain.User;
 import cn.itcast.oa.service.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -69,4 +70,13 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
     public static final String SHOW = "show";
 
     public static final String TO_SHOW = "toShow";
+
+    /**
+     * 获取当前用户
+     * @return
+     */
+    protected User getCurrentUser(){
+        return (User) ActionContext.getContext().getSession().get("user");
+    }
+
 }

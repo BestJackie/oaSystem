@@ -14,8 +14,8 @@
 </span></div>
 
     <div id="Info">
-    	<a href="http://www.baidu.com" title = "百度首页" target=_blank >百度</a> |
-        <a href="http://www.csdn.net/" title = "BBS" target=_blank >BBS</a>
+    	<a href="http://www.itcast.cn" title = "传智播客首页" target=_blank >传智播客首页</a> |
+        <a href="http://bbs.itcast.cn" title = "传智播客BBS" target=_blank >传智播客BBS</a>
     </div>
 
     <DIV id=DesktopText>

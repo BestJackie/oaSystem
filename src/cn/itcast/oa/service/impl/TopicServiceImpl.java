@@ -22,7 +22,26 @@ public class TopicServiceImpl extends DaoSupportImpl<Topic> implements TopicServ
                 // FIXME: 2016/9/27 0027 怎么排序
                 "from Topic t where t.forum = :forum " +
                         "order by t.type desc , t.lastUpdateTime desc ")
-                .setParameter("forum",forum)
+                .setParameter("forum", forum)
                 .list();
+    }
+
+    @Override
+    public void save(Topic entity) {
+        //业务方法中
+        entity.setType(Topic.TYPE_NORMAL);//默认为普通贴
+        entity.setReplyCount(0);//默认0
+        entity.setLastReply(null);//默认null
+        entity.setLastUpdateTime(entity.getPostTime());//默认
+        getSession().save(entity);
+
+        //维护特殊属性
+        Forum forum = entity.getForum();
+        forum.setTopicCount(forum.getTopicCount()+1);
+        forum.setArticleCount(forum.getArticleCount()+1);
+        forum.setLastTopic(entity);
+        getSession().update(forum);
+
+
     }
 }

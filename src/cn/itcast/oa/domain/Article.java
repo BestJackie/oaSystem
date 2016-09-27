@@ -10,7 +10,7 @@ public class Article {
     private String title;//标题
     private String content;//内容
 //    private String faceIcon;//表情符号
-    private User anthor;//作者
+    private User author;//作者
     private Date postTime;//发表时间
     private String ipAddr;//发表文章时所用的ip地址
 
@@ -46,12 +46,12 @@ public class Article {
 //        this.faceIcon = faceIcon;
 //    }
 
-    public User getAnthor() {
-        return anthor;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAnthor(User anthor) {
-        this.anthor = anthor;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public Date getPostTime() {

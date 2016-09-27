@@ -13,7 +13,7 @@
 		<property name="content" type="text" length="65536"/>
 		<property name="postTime" type="timestamp"/>
 		<!--author属性,本类与User的多对一关系 -->
-		<many-to-one name="anthor" class="User" column="authorId"/>
+		<many-to-one name="author" class="User" column="authorId"/>
 		<!--topic属性,本类与Topic的多对一关系 -->
 		<many-to-one name="topic" class="Topic" column="topicId"/>
 	</class>

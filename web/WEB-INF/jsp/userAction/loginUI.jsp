@@ -1,14 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>OA System</title>
+	<title>Itcast OA</title>
     <%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
 	<link href="${pageContext.request.contextPath}/style/blue/login.css" type=text/css rel=stylesheet>
 	<script type="text/javascript">
 		$(function(){
 			document.forms[0].loginName.focus();
 		});
-
+		
 		// 在被嵌套时就刷新上级窗口
 		if(window.parent != window){
 			window.parent.location.reload(true);
@@ -43,11 +43,11 @@
                     </tr>
                     <tr>
                         <td class="Subject"><img border="0" src="${pageContext.request.contextPath}/style/blue/images/login/password.gif" /></td>
-                        <td><s:password name="passWord" id="aa" size="20" tabindex="2" showPassword="false" cssClass="TextField required" /></td>
+                        <td><s:password name="password" id="aa" size="20" tabindex="2" showPassword="false" cssClass="TextField required" /></td>
                     </tr>
                 </table>
             </div>
-            <div id="CopyRight"><a href="javascript:void(0)">&copy; 2017 版权所有 xinongtech</a></div>
+            <div id="CopyRight"><a href="javascript:void(0)">&copy; 2010 版权所有 itcast</a></div>
         </div>
     </div>
     </s:form>
