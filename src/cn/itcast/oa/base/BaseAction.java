@@ -17,7 +17,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 
     public BaseAction() {
         //通过反射获得model的真实类型
-        ParameterizedType type = (ParameterizedType)this.getClass().getGenericSuperclass();
+        ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
         Class<T> clazz = (Class<T>) type.getActualTypeArguments()[0];
         //通过反射获取model实例
         try {
@@ -34,6 +34,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
     public T getModel() {
         return model;
     }
+
     @Autowired
     protected RoleService roleService;
     @Autowired
@@ -46,10 +47,11 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
     protected ForumService forumService;
 
 
-    protected void putIntoMap(String key,Object value){
-        ActionContext.getContext().put(key,value);
+    protected void putIntoMap(String key, Object value) {
+        ActionContext.getContext().put(key, value);
     }
-    protected void pushIntoValueStack(Object value){
+
+    protected void pushIntoValueStack(Object value) {
         ActionContext.getContext().getValueStack().push(value);
     }
 
@@ -60,5 +62,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
     public static final String LOGINUI = "loginUI";
     public static final String LOGOUT = "logout";
     public static final String TO_INDEX = "toIndex";
+    public static final String SHOW = "show";
 
+    public static final String TO_SHOW = "toShow";
 }
