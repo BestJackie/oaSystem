@@ -32,7 +32,9 @@ public class TopicAction extends BaseAction<Topic> {
 
     public String add() {
         Forum forum = forumService.getById(forumId);
-        //表单中的信息
+        //表单中的信息 model中已经封装了title,content
+//        model.setTitle(title);
+//        model.setContent(content);
         model.setForum(forum);
 
         //当前直接获取的信息
