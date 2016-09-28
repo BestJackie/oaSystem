@@ -19,7 +19,7 @@ public class User implements Serializable {
     private Set<Role> roles;
     private String phoneNumber;
     private String email;
-    private String passWord;
+    private String password;
 
     public boolean hasPrivilegeByName(String name) {
         if(isAdmin())
@@ -120,12 +120,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public User() {

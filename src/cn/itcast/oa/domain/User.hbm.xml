@@ -11,7 +11,7 @@
 		</id>
 		<property name="name"/>
 		<property name="loginName" />
-		<property name="passWord" />
+		<property name="password" />
 		<property name="gender" />
 		<property name="phoneNumber" />
 		<property name="email" />

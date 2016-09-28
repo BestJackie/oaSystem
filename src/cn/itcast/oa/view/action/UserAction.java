@@ -87,7 +87,7 @@ public class UserAction extends BaseAction<User> {
         model.setRoles(new HashSet<Role>(roles));
         //reset password(使用MD5摘要);
         String password = DigestUtils.md5Hex("1234");
-        model.setPassWord(password);
+        model.setPassword(password);
         userService.save(model);
         return COMMON_TOLIST;
     }
@@ -163,7 +163,7 @@ public class UserAction extends BaseAction<User> {
     public String initPassword() {
         User user = userService.getById(model.getId());
         String password = DigestUtils.md5Hex("1234");
-        user.setPassWord(password);
+        user.setPassword(password);
         userService.update(user);
         return COMMON_TOLIST;
     }
@@ -187,11 +187,11 @@ public class UserAction extends BaseAction<User> {
             addFieldError("login", "登陆名不能为空");
             return LOGINUI;
         }
-        if (model.getPassWord() == null) {
+        if (model.getPassword() == null) {
             addFieldError("password", "密码不能为空");
             return LOGINUI;
         }
-        User user = userService.findByLoginNameAndPassword(model.getLoginName(), model.getPassWord());
+        User user = userService.findByLoginNameAndPassword(model.getLoginName(), model.getPassword());
         if (user == null) {
             addFieldError("login", "登陆名或密码错误");
             return LOGINUI;
