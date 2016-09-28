@@ -25,7 +25,7 @@ public class Installer {
         User user = new User();
         user.setLoginName("admin");
         user.setName("超级管理员");
-        user.setPassWord(DigestUtils.md5Hex("admin"));
+        user.setPassword(DigestUtils.md5Hex("admin"));
         session.save(user);
         // ==============================================================
         // 保存权限数据
@@ -59,7 +59,7 @@ public class Installer {
 
         // --------------------
         menu = new Privilege("网上交流", null, null);
-        menu1 = new Privilege("论坛管理", "/forumManage_list", menu);
+        menu1 = new Privilege("论坛管理", "/forumManager_list", menu);
         menu2 = new Privilege("论坛", "/forum_list", menu);
         session.save(menu);
         session.save(menu1);

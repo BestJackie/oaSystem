@@ -14,20 +14,19 @@ import java.util.List;
 @Controller
 @Scope("prototype")
 public class ForumAction extends BaseAction<Forum> {
-    public String list(){
+    public String list() {
         List<Forum> forumList = forumService.findAll();
-        putIntoMap("forumList",forumList);
+        putIntoMap("forumList", forumList);
         return COMMON_LIST;
     }
 
-    public String show(){
-        //准备数据
+    public String show() {
+        // 准备数据：forum
         Forum forum = forumService.getById(model.getId());
-        pushIntoValueStack(forum);
+        putIntoMap("forum", forum);
         //准备数据 主题列表
         List<Topic> topicList = topicService.findByForum(forum);
-        putIntoMap("topicList",topicList);
-
+        putIntoMap("recordList", topicList);
         return SHOW;
     }
 }

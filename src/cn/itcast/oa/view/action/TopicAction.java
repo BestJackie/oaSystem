@@ -2,6 +2,7 @@ package cn.itcast.oa.view.action;
 
 import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Forum;
+import cn.itcast.oa.domain.Reply;
 import cn.itcast.oa.domain.Topic;
 import cn.itcast.oa.domain.User;
 import org.apache.struts2.ServletActionContext;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/27 0027.
@@ -27,6 +29,11 @@ public class TopicAction extends BaseAction<Topic> {
     }
 
     public String show() {
+        Topic topic = topicService.getById(model.getId());
+        putIntoMap("topic", topic);
+
+        List<Reply> replyList = replyService.findByTopic(topic);
+        putIntoMap("replyList",replyList);
         return SHOW;
     }
 

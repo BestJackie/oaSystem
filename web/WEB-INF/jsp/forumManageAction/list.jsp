@@ -42,15 +42,15 @@
 				<td>${name}&nbsp;</td>
 				<td>${description}&nbsp;</td>
 				<td>
-					<s:a action="forumManager_delete?id=%{id}" onclick="return delConfirm()">删除</s:a>
-					<s:a action="forumManager_editUI?id=%{id}">修改</s:a>
+					<s:a action="forumManage_delete?id=%{id}" onclick="return delConfirm()">删除</s:a>
+					<s:a action="forumManage_editUI?id=%{id}">修改</s:a>
 					
 					<!-- 最上面的不能上移 -->
 					<s:if test="#status.first">
 						<span class="disabled">上移</span>
 					</s:if>
 					<s:else>
-						<s:a action="forumManager_moveUp?id=%{id}">上移</s:a>
+						<s:a action="forumManage_moveUp?id=%{id}">上移</s:a>
 					</s:else>
 					
 					<!-- 最下面的不能下移 -->
@@ -58,7 +58,7 @@
 						<span class="disabled">下移</span>
 					</s:if>
 					<s:else>
-						<s:a action="forumManager_moveDown?id=%{id}">下移</s:a>
+						<s:a action="forumManage_moveDown?id=%{id}">下移</s:a>
 					</s:else>
 					
 				</td>
@@ -71,7 +71,7 @@
     <!-- 其他功能超链接 -->
     <div id="TableTail">
         <div id="TableTail_inside">
-            <s:a action="forumManager_addUI"><img src="${pageContext.request.contextPath}/style/images/createNew.png" /></s:a>
+            <s:a action="forumManage_addUI"><img src="${pageContext.request.contextPath}/style/images/createNew.png" /></s:a>
         </div>
     </div>
 </div>

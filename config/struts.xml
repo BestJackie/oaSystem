@@ -56,10 +56,10 @@
         </action>
 
         <!-- 论坛板块 -->
-        <action name="forumManager_*" class="forumAction" method="{1}">
-            <result name="list">/WEB-INF/jsp/forumManagerAction/list.jsp</result>
-            <result name="saveUI">/WEB-INF/jsp/forumManagerAction/saveUI.jsp</result>
-            <result name="toList" type="redirectAction">forumManager_list</result>
+        <action name="forumManage_*" class="forumManagerAction" method="{1}">
+            <result name="list">/WEB-INF/jsp/forumManageAction/list.jsp</result>
+            <result name="saveUI">/WEB-INF/jsp/forumManageAction/saveUI.jsp</result>
+            <result name="toList" type="redirectAction">forumManage_list</result>
         </action>
 
         <!-- 论坛板块相关功能 -->
@@ -71,12 +71,12 @@
         <action name="topic_*" class="topicAction" method="{1}">
             <result name="show">/WEB-INF/jsp/topicAction/show.jsp</result>
             <result name="addUI">/WEB-INF/jsp/topicAction/addUI.jsp</result>
-            <result name="toShow" type="redirectAction">topic_show</result>
+            <result name="toShow" type="redirectAction">topic_show?id=${id}</result>
         </action>
         <!-- 论坛 回复相关功能 -->
         <action name="reply_*" class="replyAction" method="{1}">
         <result name="addUI">/WEB-INF/jsp/replyAction/addUI.jsp</result>
-        <result name="toTopicShow" type="redirectAction">topic_show</result>
+        <result name="toTopicShow" type="redirectAction">topic_show?id=${topicId}</result>
     </action>
     </package>
 </struts>

@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl extends DaoSupportImpl<User> implements UserService{
-    public User findByLoginNameAndPassword(String loginName, String passWord) {
-        String MD5passWord = DigestUtils.md5Hex(passWord);
+    public User findByLoginNameAndPassword(String loginName, String password) {
+        String MD5password = DigestUtils.md5Hex(password);
         return (User) getSession().createQuery("from User u where " +
-                "u.loginName=:loginName and u.passWord=:MD5passWord")
+                "u.loginName=:loginName and u.password=:MD5password")
                 .setParameter("loginName",loginName)
-                .setParameter("MD5passWord",MD5passWord)
+                .setParameter("MD5password",MD5password)
                 .uniqueResult();
     }
 }

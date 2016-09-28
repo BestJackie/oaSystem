@@ -18,9 +18,9 @@ public class TopicServiceImpl extends DaoSupportImpl<Topic> implements TopicServ
     public List<Topic> findByForum(Forum forum) {
         return getSession().createQuery(
                 //排序，所有置顶帖在最上面，并按最后更新时间排序
-                "from Topic t where t.forum = :forum " +
+                "from Topic t where t.forum =? " +
                         "order by (case t.type when 2 then 2 else 0 end ) desc , t.lastUpdateTime desc ")
-                .setParameter("forum", forum)
+                .setParameter(0, forum)
                 .list();
     }
 
