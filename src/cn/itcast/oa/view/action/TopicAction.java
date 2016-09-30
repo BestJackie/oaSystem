@@ -2,7 +2,7 @@ package cn.itcast.oa.view.action;
 
 import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Forum;
-import cn.itcast.oa.domain.Reply;
+import cn.itcast.oa.domain.PageBean;
 import cn.itcast.oa.domain.Topic;
 import cn.itcast.oa.domain.User;
 import org.apache.struts2.ServletActionContext;
@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/27 0027.
@@ -19,6 +18,26 @@ import java.util.List;
 @Scope("prototype")
 public class TopicAction extends BaseAction<Topic> {
     private Long forumId;
+
+    private int pageNum;//当前页
+
+    private int pageSize;//每页数量
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public Long getForumId() {
         return forumId;
@@ -29,11 +48,17 @@ public class TopicAction extends BaseAction<Topic> {
     }
 
     public String show() {
+        //准备数据 topic
         Topic topic = topicService.getById(model.getId());
         putIntoMap("topic", topic);
 
-        List<Reply> replyList = replyService.findByTopic(topic);
-        putIntoMap("replyList",replyList);
+//        //准备数据replyList
+//        List<Reply> replyList = replyService.findByTopic(topic);
+//        putIntoMap("replyList",replyList);
+
+        //准备分页信息
+        PageBean pageBean = replyService.getPageBeanByTopic(pageNum,pageSize,topic);
+        pushIntoValueStack(pageBean);
         return SHOW;
     }
 

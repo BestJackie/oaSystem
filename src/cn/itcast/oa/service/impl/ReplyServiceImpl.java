@@ -2,6 +2,7 @@ package cn.itcast.oa.service.impl;
 
 import cn.itcast.oa.base.DaoSupportImpl;
 import cn.itcast.oa.domain.Forum;
+import cn.itcast.oa.domain.PageBean;
 import cn.itcast.oa.domain.Reply;
 import cn.itcast.oa.domain.Topic;
 import cn.itcast.oa.service.ReplyService;
@@ -16,6 +17,11 @@ import java.util.List;
 @Service
 @Transactional
 public class ReplyServiceImpl extends DaoSupportImpl<Reply> implements ReplyService {
+    public PageBean getPageBeanByTopic(int pageNum, int pageSize, Topic topic) {
+
+        return new PageBean(pageSize,pageNum,count,list);
+    }
+
     public List<Reply> findByTopic(Topic topic) {
         return getSession().createQuery("from Reply r " +
                 "where r.topic =? order by r.postTime ")

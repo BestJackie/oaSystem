@@ -49,7 +49,7 @@ public class ReplyAction extends BaseAction<Reply>{
      * @return
      */
     public String addUI(){
-        Topic topic = topicService.getById(model.getId());
+        Topic topic = topicService.getById(topicId);
         putIntoMap("topic",topic);
         return "addUI";
     }
