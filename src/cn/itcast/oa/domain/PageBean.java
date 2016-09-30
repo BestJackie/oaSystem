@@ -24,7 +24,30 @@ public class PageBean {
         this.recordCount = recordCount;
         //计算总页码
         pageCount = (recordCount + pageSize - 1) / pageSize;
-        // TODO: 2016/9/30 0030  计算BeginpageIndex 和EndpageIndex
+        //  计算BeginpageIndex 和EndpageIndex
+        //总页码不多于10页，则显示全部
+        if (pageCount <= 10) {
+            beginPageIndex = 1;
+            endPageIndex = pageCount;
+        }
+        //总页数多余10页则显示当前页附近的共10个页码
+        else {
+            //当前页附近的共10个页码，（前4+当前页+后5页）
+            beginPageIndex = currentPage - 4;
+            endPageIndex = currentPage + 5;
+            //当前页的页码不足4个时，则显示前10个页码
+            if (beginPageIndex < 1) {
+                beginPageIndex = 1;
+                endPageIndex = 10;
+            }
+            //当后面的页码不足5个时，则显示后10个页码
+            if (endPageIndex > pageCount) {
+                endPageIndex = pageCount;
+                beginPageIndex = pageCount - 10;
+            }
+
+        }
+
 
     }
 

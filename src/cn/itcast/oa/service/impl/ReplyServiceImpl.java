@@ -18,8 +18,17 @@ import java.util.List;
 @Transactional
 public class ReplyServiceImpl extends DaoSupportImpl<Reply> implements ReplyService {
     public PageBean getPageBeanByTopic(int pageNum, int pageSize, Topic topic) {
-
-        return new PageBean(pageSize,pageNum,count,list);
+        Long count = (Long)getSession().createQuery("from Reply r " +
+                "where r.topic =? ")
+                .setParameter(0,topic)
+                .uniqueResult();
+        List<Reply> list = getSession().createQuery("from Reply r " +
+                "where r.topic =? order by r.postTime ")
+                .setParameter(0,topic)
+                .setFirstResult((pageNum-1)*pageSize)
+                .setMaxResults(pageSize)
+                .list();
+        return new PageBean(pageSize,pageNum,list,count.intValue());
     }
 
     public List<Reply> findByTopic(Topic topic) {
