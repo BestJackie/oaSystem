@@ -17,4 +17,6 @@ public interface TopicService extends DaoSupport<Topic> {
      * @return
      */
     List<Topic> findByForum(Forum forum);
+
+//    PageBean getPageBeanByForum(int pageNum, int pageSize,Forum forum);
 }

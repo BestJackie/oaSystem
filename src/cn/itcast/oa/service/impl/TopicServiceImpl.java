@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 @Transactional
 public class TopicServiceImpl extends DaoSupportImpl<Topic> implements TopicService {
+    @Deprecated
     public List<Topic> findByForum(Forum forum) {
         return getSession().createQuery(
                 //排序，所有置顶帖在最上面，并按最后更新时间排序
@@ -42,4 +43,18 @@ public class TopicServiceImpl extends DaoSupportImpl<Topic> implements TopicServ
 
 
     }
+
+//    public PageBean getPageBeanByForum(int pageNum, int pageSize,Forum forum) {
+//        Long count = (Long)getSession().createQuery("select count(*) from Topic t " +
+//                "where t.forum =? ")
+//                .setParameter(0,forum)
+//                .uniqueResult();
+//        List<Reply> list = getSession().createQuery( "from Topic t where t.forum =? " +
+//                "order by (case t.type when 2 then 2 else 0 end ) desc , t.lastUpdateTime desc ")
+//                .setParameter(0, forum)
+//                .setFirstResult((pageNum-1)*pageSize)
+//                .setMaxResults(pageSize)
+//                .list();
+//        return new PageBean(pageSize,pageNum,list,count.intValue());
+//    }
 }

@@ -9,7 +9,9 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/27 0027.
@@ -18,26 +20,6 @@ import java.util.Date;
 @Scope("prototype")
 public class TopicAction extends BaseAction<Topic> {
     private Long forumId;
-
-    private int pageNum;//当前页
-
-    private int pageSize;//每页数量
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
 
     public Long getForumId() {
         return forumId;
@@ -57,7 +39,13 @@ public class TopicAction extends BaseAction<Topic> {
 //        putIntoMap("replyList",replyList);
 
         //准备分页信息
-        PageBean pageBean = replyService.getPageBeanByTopic(pageNum,pageSize,topic);
+//        PageBean pageBean = replyService.getPageBeanByTopic(pageNum, pageSize, topic);
+//        pushIntoValueStack(pageBean);
+
+        String hql = "from Reply r where r.topic =? order by r.postTime ";
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(topic);
+        PageBean pageBean = replyService.getPageBean(pageNum,pageSize,hql,parameters);
         pushIntoValueStack(pageBean);
         return SHOW;
     }

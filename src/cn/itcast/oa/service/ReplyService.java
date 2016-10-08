@@ -1,7 +1,6 @@
 package cn.itcast.oa.service;
 
 import cn.itcast.oa.base.DaoSupport;
-import cn.itcast.oa.domain.PageBean;
 import cn.itcast.oa.domain.Reply;
 import cn.itcast.oa.domain.Topic;
 
@@ -18,5 +17,5 @@ public interface ReplyService extends DaoSupport<Reply> {
      * @return
      */List<Reply> findByTopic(Topic topic);
 
-    PageBean getPageBeanByTopic(int pageNum, int pageSize, Topic topic);
+//    PageBean getPageBeanByTopic(int pageNum, int pageSize, Topic topic);
 }

@@ -2,7 +2,6 @@ package cn.itcast.oa.service.impl;
 
 import cn.itcast.oa.base.DaoSupportImpl;
 import cn.itcast.oa.domain.Forum;
-import cn.itcast.oa.domain.PageBean;
 import cn.itcast.oa.domain.Reply;
 import cn.itcast.oa.domain.Topic;
 import cn.itcast.oa.service.ReplyService;
@@ -17,19 +16,19 @@ import java.util.List;
 @Service
 @Transactional
 public class ReplyServiceImpl extends DaoSupportImpl<Reply> implements ReplyService {
-    public PageBean getPageBeanByTopic(int pageNum, int pageSize, Topic topic) {
-        Long count = (Long)getSession().createQuery("from Reply r " +
-                "where r.topic =? ")
-                .setParameter(0,topic)
-                .uniqueResult();
-        List<Reply> list = getSession().createQuery("from Reply r " +
-                "where r.topic =? order by r.postTime ")
-                .setParameter(0,topic)
-                .setFirstResult((pageNum-1)*pageSize)
-                .setMaxResults(pageSize)
-                .list();
-        return new PageBean(pageSize,pageNum,list,count.intValue());
-    }
+//    public PageBean getPageBeanByTopic(int pageNum, int pageSize, Topic topic) {
+//        Long count = (Long)getSession().createQuery("select count(*) from Reply r " +
+//                "where r.topic =? ")
+//                .setParameter(0,topic)
+//                .uniqueResult();
+//        List<Reply> list = getSession().createQuery("from Reply r " +
+//                "where r.topic =? order by r.postTime ")
+//                .setParameter(0,topic)
+//                .setFirstResult((pageNum-1)*pageSize)
+//                .setMaxResults(pageSize)
+//                .list();
+//        return new PageBean(pageSize,pageNum,list,count.intValue());
+//    }
 
     public List<Reply> findByTopic(Topic topic) {
         return getSession().createQuery("from Reply r " +
