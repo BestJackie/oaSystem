@@ -1,6 +1,7 @@
 package cn.itcast.oa.base;
 
 import cn.itcast.oa.domain.PageBean;
+import cn.itcast.oa.util.QueryHelper;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface DaoSupport<T> {
     List<T> getByIds(Long[] ids);
     List<T> findAll();
     PageBean getPageBean(int pageNum,int pageSize,String hql,List<Object> parameters);
+    PageBean getPageBean(int pageNum, int pageSize, QueryHelper queryHelper);
 }

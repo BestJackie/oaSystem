@@ -30,8 +30,7 @@ public class ForumAction extends BaseAction<Forum> {
 //        putIntoMap("recordList", topicList);
 
 //        PageBean pageBean = topicService.getPageBeanByForum(pageNum, pageSize, forum);
-        String hql = "from Topic t where t.forum =? order by (case t.type when 2 then 2 else 0 end ) desc , t.lastUpdateTime desc ";
-        List<Object> parameters = new ArrayList<Object>();
+        String hql = "from Topic t where t.forum =? " + "order by (case t.type when 2 then 2 else 0 end ) desc , t.lastUpdateTime desc "; List<Object> parameters = new ArrayList<Object>();
         parameters.add(forum);
         PageBean pageBean = topicService.getPageBean(pageNum, pageSize, hql, parameters);
         pushIntoValueStack(pageBean);

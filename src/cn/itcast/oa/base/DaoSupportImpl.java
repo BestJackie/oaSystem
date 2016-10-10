@@ -1,6 +1,7 @@
 package cn.itcast.oa.base;
 
 import cn.itcast.oa.domain.PageBean;
+import cn.itcast.oa.util.QueryHelper;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -68,6 +69,13 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
                 .list();
     }
 
+    /**
+     * @param pageNum
+     * @param pageSize
+     * @param hql
+     * @param parameters
+     * @return
+     */
     public PageBean getPageBean(int pageNum, int pageSize, String hql, List<Object> parameters) {
         Query listQuery = getSession().createQuery(hql);
         if (parameters != null) {//设置参数
@@ -87,5 +95,38 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
         }
         Long count = (Long) countQuery.uniqueResult();
         return new PageBean(pageSize, pageNum, list, count.intValue());
+    }
+
+    /**
+     * 公共的查询分页信息的方法（最终版）
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param queryHelper HQL语句与参数列表
+     * @return
+     */
+    public PageBean getPageBean(int pageNum, int pageSize, QueryHelper queryHelper) {
+        System.out.println("-------> DaoSupportImpl.getPageBean( int pageNum, int pageSize, QueryHelper queryHelper )");
+        List<Object> parameters = queryHelper.getParameters();
+        Query listQuery = getSession().createQuery(queryHelper.getListQueryHql());
+        if (parameters!=null) {
+            for (int i = 0; i < parameters.size(); i++) {
+                Object o =  parameters.get(i);
+                listQuery.setParameter(i,o);
+            }
+        }
+        listQuery.setFirstResult((pageNum-1)*pageSize);
+        listQuery.setMaxResults(pageSize);
+        List list = listQuery.list();
+        //数量查询
+        Query countQuery = getSession().createQuery(queryHelper.getCountQueryHql());
+        if (parameters!=null) {
+            for (int i = 0; i < list.size(); i++) {
+                Object o =  list.get(i);
+                countQuery.setParameter(i,o);
+            }
+        }
+        Long count = (Long) countQuery.uniqueResult();
+        return new PageBean(pageSize,pageNum,list,count.intValue());
     }
 }

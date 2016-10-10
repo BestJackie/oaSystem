@@ -16,33 +16,38 @@ import java.util.List;
  */
 public class SpringTest {
     private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+
     @Test
-    public void springTest(){
-       TestAction testAction = (TestAction) applicationContext.getBean("testAction");
+    public void springTest() {
+        TestAction testAction = (TestAction) applicationContext.getBean("testAction");
         System.out.println(testAction);
     }
+
     @Test
-    public void sessionFactoryTest(){
-        SessionFactory sessionFactory = (SessionFactory)applicationContext.getBean("sessionFactory");
+    public void sessionFactoryTest() {
+        SessionFactory sessionFactory = (SessionFactory) applicationContext.getBean("sessionFactory");
         System.out.println(sessionFactory);
     }
+
     @Test
-    public void testTranctionManager(){
-        TestService testService = (TestService)applicationContext.getBean("testService");
+    public void testTranctionManager() {
+        cn.itcast.oa.test.TestService testService = (cn.itcast.oa.test.TestService) applicationContext.getBean("testService");
         testService.saveTwoUser();
     }
+
     @Test
-    public void serviceTest(){
-        RoleService roleService =(RoleService)applicationContext.getBean("roleServiceImpl");
-        List<Role> list= roleService.findAll();
-        for(Role role:list){
+    public void serviceTest() {
+        RoleService roleService = (RoleService) applicationContext.getBean("roleServiceImpl");
+        List<Role> list = roleService.findAll();
+        for (Role role : list) {
             System.out.println(role.getName());
         }
     }
+
     @Test
-    public void testLogin(){
-        UserService userService = (UserService)applicationContext.getBean("userServiceImpl");
-        User user =  userService.findByLoginNameAndPassword("qwqwqw","1234");
+    public void testLogin() {
+        UserService userService = (UserService) applicationContext.getBean("userServiceImpl");
+        User user = userService.findByLoginNameAndPassword("qwqwqw", "1234");
         System.out.println(user.getName());
     }
 
