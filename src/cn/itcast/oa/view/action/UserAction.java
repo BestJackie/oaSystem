@@ -5,6 +5,7 @@ import cn.itcast.oa.domain.Department;
 import cn.itcast.oa.domain.Role;
 import cn.itcast.oa.domain.User;
 import cn.itcast.oa.util.DepartmentUtils;
+import cn.itcast.oa.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
@@ -45,8 +46,9 @@ public class UserAction extends BaseAction<User> {
      * @return
      */
     public String list() {
-        List<User> userList = userService.findAll();
-        putIntoMap("userList", userList);
+//        List<User> userList = userService.findAll();
+//        putIntoMap("userList", userList);
+        new QueryHelper(User.class,"u").preparePageBean(userService,pageNum,pageSize);
         return COMMON_LIST;
     }
 

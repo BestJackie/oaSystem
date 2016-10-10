@@ -78,7 +78,7 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
      */
     public PageBean getPageBean(int pageNum, int pageSize, String hql, List<Object> parameters) {
         Query listQuery = getSession().createQuery(hql);
-        if (parameters != null) {//设置参数
+        if (parameters.size() != 0) {//设置参数
             for (int i = 0; i < parameters.size(); i++) {
                 listQuery.setParameter(i, parameters.get(i));
             }
@@ -88,7 +88,7 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
         List list = listQuery.list();
 
         Query countQuery = getSession().createQuery("select count (*) from " + hql);
-        if (parameters != null) {//设置参数
+        if (parameters.size() != 0) {//设置参数
             for (int i = 0; i < parameters.size(); i++) {
                 countQuery.setParameter(i, parameters.get(i));
             }
@@ -109,24 +109,24 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
         System.out.println("-------> DaoSupportImpl.getPageBean( int pageNum, int pageSize, QueryHelper queryHelper )");
         List<Object> parameters = queryHelper.getParameters();
         Query listQuery = getSession().createQuery(queryHelper.getListQueryHql());
-        if (parameters!=null) {
+        if (parameters.size() != 0) {
             for (int i = 0; i < parameters.size(); i++) {
-                Object o =  parameters.get(i);
-                listQuery.setParameter(i,o);
+                Object o = parameters.get(i);
+                listQuery.setParameter(i, o);
             }
         }
-        listQuery.setFirstResult((pageNum-1)*pageSize);
+        listQuery.setFirstResult((pageNum - 1) * pageSize);
         listQuery.setMaxResults(pageSize);
         List list = listQuery.list();
         //数量查询
         Query countQuery = getSession().createQuery(queryHelper.getCountQueryHql());
-        if (parameters!=null) {
-            for (int i = 0; i < list.size(); i++) {
-                Object o =  list.get(i);
-                countQuery.setParameter(i,o);
+        if (parameters.size() != 0) {
+            for (int i = 0; i < parameters.size(); i++) {
+                Object o = parameters.get(i);
+                countQuery.setParameter(i, o);
             }
         }
         Long count = (Long) countQuery.uniqueResult();
-        return new PageBean(pageSize,pageNum,list,count.intValue());
+        return new PageBean(pageSize, pageNum, list, count.intValue());
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class QueryHelper {
     private String fromClause;
-    private String whereClause;
-    private String orderByClause;
+    private String whereClause="";
+    private String orderByClause="";
 
     private List<Object> parameters = new ArrayList<Object>();
 

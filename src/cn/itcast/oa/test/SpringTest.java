@@ -40,7 +40,7 @@ public class SpringTest {
         RoleService roleService = (RoleService) applicationContext.getBean("roleServiceImpl");
         List<Role> list = roleService.findAll();
         for (Role role : list) {
-            System.out.println(role.getName());
+//            System.out.println(role.getName());
         }
     }
 
