@@ -92,10 +92,11 @@ public class QueryHelper {
         return parameters;
     }
 
-    public void preparePageBean(DaoSupport<?>service,int pageNum,int pageSize){
-        PageBean pageBean = service.getPageBean(pageNum,pageSize,this);
+    public void preparePageBean(DaoSupport<?> service, int pageNum, int pageSize) {
+        PageBean pageBean = service.getPageBean(pageNum, pageSize, this);
         ActionContext.getContext().getValueStack().push(pageBean);
     }
-
-
 }
+
+
+

@@ -100,5 +100,32 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
         this.pageSize = pageSize;
     }
 
+    protected int viewType = 0;
+    protected int orderBy = 0;
+    protected boolean asc = false;
+
+    public boolean isAsc() {
+        return asc;
+    }
+
+    public void setAsc(boolean asc) {
+        this.asc = asc;
+    }
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+    }
+
+    public int getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(int orderBy) {
+        this.orderBy = orderBy;
+    }
 
 }
